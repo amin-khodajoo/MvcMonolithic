@@ -12,7 +12,7 @@ namespace MvcMonolithic.Models
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=FullScaffoldSampleDb;Integrated Security=True;Persist Security Info=False;Trust Server Certificate=True;");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MvcMonolithic;Integrated Security=True;Persist Security Info=False;Trust Server Certificate=True;");
             }
         }
 

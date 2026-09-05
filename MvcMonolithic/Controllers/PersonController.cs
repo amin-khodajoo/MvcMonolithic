@@ -14,7 +14,7 @@ namespace MvcMonolithic.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = _personApplicationService.GetAllPerson();
+            var result = await _personApplicationService.GetAllPerson();
             return View(result);
         }
     }

@@ -14,7 +14,7 @@ namespace MvcMonolithic.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = _productApplicationService.GetAllProduct();
+            var result = await _productApplicationService.GetAllProduct();
             return View(result);
         }
     }
