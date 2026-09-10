@@ -8,11 +8,30 @@ namespace MvcMonolithic.Models.Services.Repositories
     {
 		private readonly ProjectDbContext _projectDbContext;
 
+        #region [- Ctor -]
         public PersonRepository(ProjectDbContext projectDbContext)
         {
             _projectDbContext = projectDbContext;
         }
+        #endregion
 
+        #region [- Insert() -]
+        public async Task Insert(Person person)
+        {
+            try
+            {
+                _projectDbContext.Add(person);
+                await _projectDbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region [- SelectAll() -]
         public async Task<List<Person>> SelectAll()
         {
 			try
@@ -24,5 +43,6 @@ namespace MvcMonolithic.Models.Services.Repositories
 				throw;
 			}
         }
+        #endregion
     }
 }

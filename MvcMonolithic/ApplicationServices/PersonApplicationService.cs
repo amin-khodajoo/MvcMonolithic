@@ -8,11 +8,27 @@ namespace MvcMonolithic.ApplicationServices
     {
         private readonly IPersonRepository _personRepository;
 
+        #region [- Ctor -]
         public PersonApplicationService(IPersonRepository personRepository)
         {
             _personRepository = personRepository;
         }
+        #endregion
 
+        #region [- Post() -]
+        public async Task Post(PostPersonDto postPersonDto)
+        {
+            var person = new Models.DomainModels.PersonAggregate.Person()
+            {
+                Id = postPersonDto.Id,
+                FirstName = postPersonDto.FirstName,
+                LastName = postPersonDto.LastName,
+            };
+            await _personRepository.Insert(person);
+        }
+        #endregion
+
+        #region [- GetAllPerson() -]
         public async Task<List<GetPersonDto>> GetAllPerson()
         {
             var persons = await _personRepository.SelectAll();
@@ -30,5 +46,6 @@ namespace MvcMonolithic.ApplicationServices
             }
                 return getPersonDtos;
         }
+        #endregion
     }
 }

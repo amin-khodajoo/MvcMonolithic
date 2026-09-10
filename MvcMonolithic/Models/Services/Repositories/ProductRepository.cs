@@ -8,11 +8,14 @@ namespace MvcMonolithic.Models.Services.Repositories
     {
         private readonly ProjectDbContext _projectDbContext;
 
+        #region [- Ctor -]
         public ProductRepository(ProjectDbContext projectDbContext)
         {
             _projectDbContext = projectDbContext;
         }
+        #endregion
 
+        #region [- SelectAll() -]
         public async Task<List<Product>> SelectAll()
         {
             try
@@ -24,5 +27,6 @@ namespace MvcMonolithic.Models.Services.Repositories
                 throw;
             }
         }
+        #endregion
     }
 }
