@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using MvcMonolithic.ApplicationServices.Contracts;
 using MvcMonolithic.ApplicationServices.Dtos;
 
@@ -24,6 +24,14 @@ namespace MvcMonolithic.Controllers
         #endregion
 
         #region [- Create() -]
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PostPersonDto postPersonDto)
         {
             if (ModelState.IsValid)
