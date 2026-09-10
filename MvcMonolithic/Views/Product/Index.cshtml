@@ -1,9 +1,13 @@
-﻿@model List<GetProductDto>
+@model List<GetProductDto>
 @{
     ViewData["Title"] = "Products";
 }
 
 <h1>Products</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
 <table class="table table-striped">
     <thead>
