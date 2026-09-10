@@ -15,6 +15,22 @@ namespace MvcMonolithic.Models.Services.Repositories
         }
         #endregion
 
+        #region [- Insert() -]
+        public async Task Insert(Product product)
+        {
+            try
+            {
+                _projectDbContext.Add(product);
+                await _projectDbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #region [- SelectAll() -]
         public async Task<List<Product>> SelectAll()
         {

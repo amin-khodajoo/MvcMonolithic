@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcMonolithic.ApplicationServices.Contracts;
+using MvcMonolithic.ApplicationServices.Dtos;
 
 namespace MvcMonolithic.Controllers
 {
@@ -23,9 +24,17 @@ namespace MvcMonolithic.Controllers
         #endregion
 
         #region [- Create() -]
-        public IActionResult Create()
+        public async Task<IActionResult> Create(PostProductDto postProductDto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                await _productApplicationService.Post(postProductDto);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(postProductDto);
+            }
         }
         #endregion
     }
