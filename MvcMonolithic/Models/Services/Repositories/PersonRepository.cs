@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MvcMonolithic.Models.DomainModels.PersonAggregate;
 using MvcMonolithic.Models.Services.Contracts;
 
@@ -31,6 +31,22 @@ namespace MvcMonolithic.Models.Services.Repositories
         }
         #endregion
 
+        #region [- Edit() -]
+        public async Task Edit(Person person)
+        {
+            try
+            {
+                _projectDbContext.Update(person);
+                await _projectDbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #region [- SelectAll() -]
         public async Task<List<Person>> SelectAll()
         {
@@ -42,6 +58,20 @@ namespace MvcMonolithic.Models.Services.Repositories
 			{
 				throw;
 			}
+        }
+        #endregion
+
+        #region [- SelectById() -]
+        public async Task<Person?> SelectById(int id)
+        {
+            try
+            {
+                return await _projectDbContext.Person.FindAsync(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         #endregion
     }

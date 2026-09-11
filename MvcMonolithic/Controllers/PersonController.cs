@@ -45,5 +45,33 @@ namespace MvcMonolithic.Controllers
             }
         }
         #endregion
+
+        #region [- Edit() -]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id) 
+        { 
+            var person = await _personApplicationService.GetById(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return View(person);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(PutPersonDto putPersonDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _personApplicationService.Put(putPersonDto);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(putPersonDto);
+            }
+        }
+        #endregion
     }
 }
