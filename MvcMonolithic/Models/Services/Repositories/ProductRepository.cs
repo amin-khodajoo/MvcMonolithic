@@ -31,6 +31,22 @@ namespace MvcMonolithic.Models.Services.Repositories
         }
         #endregion
 
+        #region [- Edit() -]
+        public async Task Edit(Product product)
+        {
+            try
+            {
+                _projectDbContext.Update(product);
+                await _projectDbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
         #region [- SelectAll() -]
         public async Task<List<Product>> SelectAll()
         {
@@ -40,6 +56,22 @@ namespace MvcMonolithic.Models.Services.Repositories
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region [- SelectById() -]
+        public async Task<Product?> SelectById(int id)
+        {
+            try
+            {
+                return await _projectDbContext.Product.FindAsync(id);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

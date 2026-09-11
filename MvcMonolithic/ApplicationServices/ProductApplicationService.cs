@@ -1,7 +1,8 @@
-﻿
+
 using MvcMonolithic.ApplicationServices.Contracts;
 using MvcMonolithic.ApplicationServices.Dtos;
 using MvcMonolithic.Models.Services.Contracts;
+using MvcMonolithic.Models.Services.Repositories;
 
 namespace MvcMonolithic.ApplicationServices
 {
@@ -16,6 +17,21 @@ namespace MvcMonolithic.ApplicationServices
         }
         #endregion
 
+
+        #region [- Put() -]
+        public async Task Put(PutProductDto putProductDto)
+        {
+            var product = new Models.DomainModels.ProductAggregate.Product()
+            {
+                Id = putProductDto.Id,
+                Name = putProductDto.Name,
+                Price = putProductDto.Price,
+                Stock = putProductDto.Stock,
+            };
+            await _productRepository.Edit(product);
+        }
+        #endregion
+
         #region [- Post() -]
         public async Task Post(PostProductDto postProductDto)
         {
@@ -27,6 +43,27 @@ namespace MvcMonolithic.ApplicationServices
                 Stock = postProductDto.Stock,
             };
            await _productRepository.Insert(product);
+        }
+        #endregion
+
+        #region [- GetById() -]
+        public async Task<PutProductDto?> GetById(int id)
+        {
+            var product = await _productRepository.SelectById(id);
+            if (product == null)
+            {
+                return null;
+            }
+
+            var putProductDto = new PutProductDto()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Stock = product.Stock,
+            }; 
+            return putProductDto;
+
         }
         #endregion
 

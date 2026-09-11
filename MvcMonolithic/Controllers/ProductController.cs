@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MvcMonolithic.ApplicationServices;
 using MvcMonolithic.ApplicationServices.Contracts;
 using MvcMonolithic.ApplicationServices.Dtos;
 
@@ -42,6 +43,33 @@ namespace MvcMonolithic.Controllers
             else
             {
                 return View(postProductDto);
+            }
+        }
+        #endregion
+
+        #region [- Edit() -]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var product = await _productApplicationService.GetById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(PutProductDto putProductDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productApplicationService.Put(putProductDto);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(putProductDto);
             }
         }
         #endregion

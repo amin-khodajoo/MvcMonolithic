@@ -16,6 +16,7 @@
             <th>Name</th>
             <th>Price</th>
             <th>Stock</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,9 @@
                 <td>@product.Name</td>
                 <td>@product.Price.ToString("C")</td>
                 <td>@product.Stock</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                </td>
             </tr>
         }
     </tbody>
